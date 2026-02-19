@@ -1,0 +1,120 @@
+[
+  {
+    "id": "221e37fa-1f43-45ac-9262-12cd0fc9a1aa",
+    "title": "test",
+    "originalText": "I whad play date for Saaya in my house.I thought very easy to play in house. Because they can’t go to far, we can have a sit, all time.Tomorrow we have play date in Saaya’s house. I will fun.",
+    "tags": [
+      "test"
+    ],
+    "createdAt": "2026-02-18T18:27:01.368Z",
+    "updatedAt": "2026-02-18T18:27:01.368Z"
+  },
+  {
+    "id": "6a9da8ec-36fd-44c7-b6df-d693c4ac69c4",
+    "title": "test",
+    "originalText": "I whad play date for Saaya in my house.I thought very easy to play in house. Because they can’t go to far, we can have a sit, all time.Tomorrow we have play date in Saaya’s house. I will fun.",
+    "tags": [
+      "test",
+      "rin"
+    ],
+    "createdAt": "2026-02-18T19:55:14.597Z",
+    "updatedAt": "2026-02-18T19:55:14.597Z"
+  },
+  {
+    "id": "5f7f2b48-9e7e-4edd-bff5-a516fae9b2be",
+    "title": "test",
+    "originalText": "I whad play date for Saaya in my house.I thought very easy to play in house. Because they can’t go to far, we can have a sit, all time.Tomorrow we have play date in Saaya’s house. I will fun.",
+    "correctedText": "I had a play date for Saaya at my house. I thought it would be very easy to play at home. Because they can't go too far, we can sit and play all the time. Tomorrow we have a play date at Saaya's house. I will have fun.",
+    "corrections": [
+      {
+        "id": "1",
+        "originalText": "whad",
+        "correctedText": "had",
+        "reason": "「whad」は正しい英語ではありません。「had」に修正することで、正しい過去形の表現になります。",
+        "type": "spelling"
+      },
+      {
+        "id": "2",
+        "originalText": "very easy to play in house",
+        "correctedText": "very easy to play at home",
+        "reason": "「in house」は不自然な表現です。「at home」に修正することで、より自然な表現になります。",
+        "type": "naturalness"
+      },
+      {
+        "id": "3",
+        "originalText": "they can't go to far",
+        "correctedText": "they can't go too far",
+        "reason": "「to far」は正しい表現ではありません。「too far」に修正することで、適切な表現になります。",
+        "type": "grammar"
+      },
+      {
+        "id": "4",
+        "originalText": "we can have a sit, all time",
+        "correctedText": "we can sit and play all the time",
+        "reason": "「have a sit」は不自然な表現です。「sit and play」に修正することで、より自然な表現になります。",
+        "type": "naturalness"
+      },
+      {
+        "id": "5",
+        "originalText": "I will fun",
+        "correctedText": "I will have fun",
+        "reason": "「I will fun」は正しい英語ではありません。「I will have fun」に修正することで、適切な表現になります。",
+        "type": "grammar"
+      }
+    ],
+    "reviewHistory": [
+      {
+        "correctedText": "I had a play date for Saaya at my house. I thought it would be very easy to play at home. Because they can't go too far, we can sit and play all the time. Tomorrow we have a play date at Saaya's house. I will have fun.",
+        "corrections": [
+          {
+            "id": "1",
+            "originalText": "whad",
+            "correctedText": "had",
+            "reason": "「whad」は正しい英語ではありません。「had」に修正することで、正しい過去形の表現になります。",
+            "type": "spelling"
+          },
+          {
+            "id": "2",
+            "originalText": "very easy to play in house",
+            "correctedText": "very easy to play at home",
+            "reason": "「in house」は不自然な表現です。「at home」に修正することで、より自然な表現になります。",
+            "type": "naturalness"
+          },
+          {
+            "id": "3",
+            "originalText": "they can't go to far",
+            "correctedText": "they can't go too far",
+            "reason": "「to far」は正しい表現ではありません。「too far」に修正することで、適切な表現になります。",
+            "type": "grammar"
+          },
+          {
+            "id": "4",
+            "originalText": "we can have a sit, all time",
+            "correctedText": "we can sit and play all the time",
+            "reason": "「have a sit」は不自然な表現です。「sit and play」に修正することで、より自然な表現になります。",
+            "type": "naturalness"
+          },
+          {
+            "id": "5",
+            "originalText": "I will fun",
+            "correctedText": "I will have fun",
+            "reason": "「I will fun」は正しい英語ではありません。「I will have fun」に修正することで、適切な表現になります。",
+            "type": "grammar"
+          }
+        ],
+        "grammarScore": 80,
+        "naturalnessScore": 85,
+        "overallRating": 4
+      }
+    ],
+    "grammarScore": 80,
+    "naturalnessScore": 85,
+    "overallRating": 4,
+    "tags": [
+      "test",
+      "rin"
+    ],
+    "createdAt": "2026-02-18T20:56:33.514Z",
+    "updatedAt": "2026-02-18T20:56:33.514Z"
+  }
+]
