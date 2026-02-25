@@ -24,11 +24,16 @@ export default function HomePage() {
 
   // Load data on mount
   useEffect(() => {
-    setEntries(storageUtils.getDiaryEntries())
+    const loadEntries = async () => {
+      const loadedEntries = await storageUtils.getDiaryEntries()
+      setEntries(loadedEntries)
+    }
+    loadEntries()
   }, [])
 
-  const refreshData = () => {
-    setEntries(storageUtils.getDiaryEntries())
+  const refreshData = async () => {
+    const loadedEntries = await storageUtils.getDiaryEntries()
+    setEntries(loadedEntries)
   }
 
   const handleNewEntry = (date?: Date) => {

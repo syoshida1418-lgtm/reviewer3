@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { Progress } from "@/components/ui/progress"
+import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Star, CheckCircle, AlertCircle, Loader2, Bookmark } from "lucide-react"
 import type { ReviewResult, Correction, BookmarkedSentence } from "@/lib/types"
 import { reviewText } from "@/lib/ai-review"
@@ -19,17 +20,20 @@ interface AIReviewPanelProps {
 export function AIReviewPanel({ text, onReviewComplete }: AIReviewPanelProps) {
   const [isReviewing, setIsReviewing] = useState(false)
   const [reviewResult, setReviewResult] = useState<ReviewResult | null>(null)
+  const [error, setError] = useState<string | null>(null)
 
   const handleReview = async () => {
     if (!text.trim()) return
 
     setIsReviewing(true)
+    setError(null)
     try {
       const result = await reviewText(text)
       setReviewResult(result)
       onReviewComplete(result)
     } catch (error) {
       console.error("Review failed:", error)
+      setError(error instanceof Error ? error.message : "AIレビューの実行中にエラーが発生しました。")
     } finally {
       setIsReviewing(false)
     }
@@ -115,6 +119,14 @@ export function AIReviewPanel({ text, onReviewComplete }: AIReviewPanelProps) {
         </Button>
       </div>
 
+      {/* Error Message */}
+      {error && (
+        <Alert variant="destructive">
+          <AlertCircle className="h-4 w-4" />
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
+      )}
+
       {/* Review Results */}
       {reviewResult && (
         <div className="space-y-4">
@@ -197,15 +209,6 @@ export function AIReviewPanel({ text, onReviewComplete }: AIReviewPanelProps) {
                   <div key={correction.id} className="border rounded-lg p-4 space-y-3">
                     <div className="flex items-center justify-between">
                       <Badge className={getCorrectionTypeColor(correction.type)}>{correction.type}</Badge>
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        onClick={() => handleBookmarkCorrection(correction, index)}
-                        className="flex items-center gap-1"
-                      >
-                        <Bookmark className="h-3 w-3" />
-                        {index + 1}
-                      </Button>
                     </div>
 
                     <div className="space-y-2">
@@ -235,38 +238,7 @@ export function AIReviewPanel({ text, onReviewComplete }: AIReviewPanelProps) {
             </Card>
           )}
 
-          {reviewResult.correctedText && reviewResult.correctedText !== text && (
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg text-green-600 dark:text-green-400">Corrected Text</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="bg-green-50 dark:bg-green-950 p-4 rounded-lg space-y-3">
-                  {splitIntoSentences(reviewResult.correctedText).map((sentence, index) => {
-                    const originalSentences = splitIntoSentences(text)
-                    const originalSentence = originalSentences[index] || sentence
-
-                    return (
-                      <div
-                        key={index}
-                        className="flex items-start gap-2 p-2 rounded border border-green-200 dark:border-green-800"
-                      >
-                        <p className="text-sm leading-relaxed flex-1">{sentence}</p>
-                        <Button
-                          size="sm"
-                          variant="ghost"
-                          onClick={() => handleBookmarkSentence(sentence, originalSentence, reviewResult.corrections)}
-                          className="shrink-0"
-                        >
-                          <Bookmark className="h-4 w-4" />
-                        </Button>
-                      </div>
-                    )
-                  })}
-                </div>
-              </CardContent>
-            </Card>
-          )}
+          {/* Corrected Textカード削除済み */}
         </div>
       )}
     </div>

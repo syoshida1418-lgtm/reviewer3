@@ -1,0 +1,13 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Run Next.js dev server",
+			"type": "shell",
+			"command": "pnpm dev",
+			"args": [],
+			"isBackground": false,
+			"group": "build"
+		}
+	]
+}

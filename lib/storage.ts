@@ -6,15 +6,61 @@ const BOOKMARKED_SENTENCES_KEY = "english-reviewer-bookmarked-sentences"
 
 export const storageUtils = {
   // Diary entries
-  getDiaryEntries: (): DiaryEntry[] => {
+  getDiaryEntries: async (): Promise<DiaryEntry[]> => {
     if (typeof window === "undefined") return []
+
+    // First try to get from localStorage
     const stored = localStorage.getItem(DIARY_ENTRIES_KEY)
-    if (!stored) return []
-    return JSON.parse(stored).map((entry: any) => ({
-      ...entry,
-      createdAt: new Date(entry.createdAt),
-      updatedAt: new Date(entry.updatedAt),
-    }))
+    let localEntries: DiaryEntry[] = []
+    if (stored) {
+      try {
+        localEntries = JSON.parse(stored).map((entry: any) => ({
+          ...entry,
+          createdAt: new Date(entry.createdAt),
+          updatedAt: new Date(entry.updatedAt),
+        }))
+      } catch (err) {
+        console.warn("Failed to parse local diary entries:", err)
+      }
+    }
+
+    // Then try to sync with server
+    try {
+      const response = await fetch("/api/diary")
+      if (response.ok) {
+        const serverEntries: DiaryEntry[] = await response.json()
+        const serverEntriesParsed = serverEntries.map((entry: any) => ({
+          ...entry,
+          createdAt: new Date(entry.createdAt),
+          updatedAt: new Date(entry.updatedAt),
+        }))
+
+        // Merge server and local entries, preferring newer ones
+        const merged = new Map<string, DiaryEntry>()
+
+        // Add local entries
+        localEntries.forEach(entry => merged.set(entry.id, entry))
+
+        // Add/update with server entries
+        serverEntriesParsed.forEach(entry => {
+          const existing = merged.get(entry.id)
+          if (!existing || new Date(entry.updatedAt) > new Date(existing.updatedAt)) {
+            merged.set(entry.id, entry)
+          }
+        })
+
+        const mergedEntries = Array.from(merged.values())
+
+        // Save merged data to localStorage
+        localStorage.setItem(DIARY_ENTRIES_KEY, JSON.stringify(mergedEntries))
+
+        return mergedEntries
+      }
+    } catch (err) {
+      console.warn("Failed to sync with server:", err)
+    }
+
+    return localEntries
   },
 
   saveDiaryEntry: (entry: DiaryEntry): void => {
