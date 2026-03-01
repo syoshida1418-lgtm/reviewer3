@@ -21,6 +21,18 @@ export function AIReviewPanel({ text, onReviewComplete }: AIReviewPanelProps) {
   const [isReviewing, setIsReviewing] = useState(false)
   const [reviewResult, setReviewResult] = useState<ReviewResult | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [isOnline, setIsOnline] = useState(typeof window !== "undefined" ? navigator.onLine : true)
+
+  // ネットワーク状態監視
+  React.useEffect(() => {
+    const updateOnline = () => setIsOnline(navigator.onLine)
+    window.addEventListener("online", updateOnline)
+    window.addEventListener("offline", updateOnline)
+    return () => {
+      window.removeEventListener("online", updateOnline)
+      window.removeEventListener("offline", updateOnline)
+    }
+  }, [])
 
   const handleReview = async () => {
     if (!text.trim()) return
@@ -96,28 +108,34 @@ export function AIReviewPanel({ text, onReviewComplete }: AIReviewPanelProps) {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 w-full max-w-lg mx-auto">
       {/* Review Button */}
       <div className="flex justify-center">
         <Button
           onClick={handleReview}
-          disabled={isReviewing || !text.trim()}
+          disabled={isReviewing || !text.trim() || !isOnline}
           size="lg"
-          className="bg-blue-600 hover:bg-blue-700 text-white px-8"
+          className="bg-blue-600 hover:bg-blue-700 text-white px-8 w-full max-w-xs"
         >
           {isReviewing ? (
             <>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              <Loader2 className="mr-2 h-5 w-5 animate-spin" />
               AI Reviewing...
             </>
           ) : (
             <>
-              <CheckCircle className="mr-2 h-4 w-4" />
+              <CheckCircle className="mr-2 h-5 w-5" />
               Review with AI
             </>
           )}
         </Button>
       </div>
+      {!isOnline && (
+        <Alert variant="destructive">
+          <AlertCircle className="h-4 w-4" />
+          <AlertDescription>ネットワーク接続がありません。AI判定にはインターネット接続が必要です。</AlertDescription>
+        </Alert>
+      )}
 
       {/* Error Message */}
       {error && (

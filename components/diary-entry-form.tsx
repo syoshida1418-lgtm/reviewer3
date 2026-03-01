@@ -38,6 +38,19 @@ export function DiaryEntryForm({ entry, onSave, onCancel }: DiaryEntryFormProps)
       : null,
   )
   const [isSaving, setIsSaving] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [isOnline, setIsOnline] = useState(typeof window !== "undefined" ? navigator.onLine : true)
+
+  // ネットワーク状態監視
+  React.useEffect(() => {
+    const updateOnline = () => setIsOnline(navigator.onLine)
+    window.addEventListener("online", updateOnline)
+    window.addEventListener("offline", updateOnline)
+    return () => {
+      window.removeEventListener("online", updateOnline)
+      window.removeEventListener("offline", updateOnline)
+    }
+  }, [])
 
   const handleAddTag = () => {
     if (newTag.trim() && !tags.includes(newTag.trim())) {
@@ -87,9 +100,10 @@ export function DiaryEntryForm({ entry, onSave, onCancel }: DiaryEntryFormProps)
   }
 
   const handleSave = async () => {
-    if (!title.trim() || !text.trim()) return
+    if (!title.trim() || !text.trim() || !isOnline) return
 
     setIsSaving(true)
+    setError(null)
     try {
       const diaryEntry: DiaryEntry = {
         id: entry?.id || crypto.randomUUID(),
@@ -111,6 +125,7 @@ export function DiaryEntryForm({ entry, onSave, onCancel }: DiaryEntryFormProps)
       storageUtils.saveDiaryEntry(diaryEntry)
       onSave(diaryEntry)
     } catch (error) {
+      setError(error instanceof Error ? error.message : "保存中にエラーが発生しました。ネットワーク接続を確認してください。")
       console.error("Failed to save diary entry:", error)
     } finally {
       setIsSaving(false)
@@ -118,17 +133,29 @@ export function DiaryEntryForm({ entry, onSave, onCancel }: DiaryEntryFormProps)
   }
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6">
+    <div className="max-w-4xl mx-auto space-y-6 px-2 sm:px-4 pb-24">
+      {error && (
+        <Alert variant="destructive">
+          <AlertCircle className="h-4 w-4" />
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
+      )}
+      {!isOnline && (
+        <Alert variant="destructive">
+          <AlertCircle className="h-4 w-4" />
+          <AlertDescription>ネットワーク接続がありません。保存にはインターネット接続が必要です。</AlertDescription>
+        </Alert>
+      )}
       {/* Header */}
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">{entry ? "Edit Diary Entry" : "New Diary Entry"}</h1>
         <div className="flex gap-2">
-          <Button variant="outline" onClick={onCancel}>
+          <Button variant="outline" onClick={onCancel} size="sm" className="sm:size-md">
             Cancel
           </Button>
-          <Button onClick={handleSave} disabled={!title.trim() || !text.trim() || isSaving}>
-            <Save className="mr-2 h-4 w-4" />
-            {isSaving ? "Saving..." : "Save Entry"}
+        </div>
+      </div>
+      {/* ...existing code... */}
           </Button>
         </div>
       </div>
@@ -149,6 +176,7 @@ export function DiaryEntryForm({ entry, onSave, onCancel }: DiaryEntryFormProps)
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   placeholder="Enter a title for your diary entry..."
+                  className="text-base py-3 px-3"
                 />
               </div>
 
@@ -160,7 +188,7 @@ export function DiaryEntryForm({ entry, onSave, onCancel }: DiaryEntryFormProps)
                   value={memo}
                   onChange={(e) => setMemo(e.target.value)}
                   placeholder="Optional: add short notes or context for this entry..."
-                  className="w-full p-2 border rounded-md bg-transparent text-sm"
+                  className="w-full p-2 border rounded-md bg-transparent text-base"
                   rows={3}
                 />
               </div>
@@ -185,10 +213,10 @@ export function DiaryEntryForm({ entry, onSave, onCancel }: DiaryEntryFormProps)
                     onChange={(e) => setNewTag(e.target.value)}
                     onKeyPress={handleKeyPress}
                     placeholder="Add a tag..."
-                    className="flex-1"
+                    className="flex-1 text-base py-3 px-3"
                   />
                   <Button size="sm" onClick={handleAddTag} disabled={!newTag.trim()}>
-                    <Plus className="h-4 w-4" />
+                    <Plus className="h-5 w-5" />
                   </Button>
                 </div>
               </div>
@@ -201,6 +229,7 @@ export function DiaryEntryForm({ entry, onSave, onCancel }: DiaryEntryFormProps)
             onChange={setText}
             title="Your English Text"
             placeholder="Write your diary entry in English here..."
+            className="text-base py-3 px-3"
           />
         </div>
 
@@ -208,6 +237,13 @@ export function DiaryEntryForm({ entry, onSave, onCancel }: DiaryEntryFormProps)
         <div className="space-y-6">
           <AIReviewPanel text={text} onReviewComplete={handleReviewComplete} />
         </div>
+      </div>
+      {/* 画面下部に保存ボタンを固定表示（スマホ用） */}
+      <div className="fixed bottom-0 left-0 w-full bg-white border-t z-50 p-3 flex justify-center sm:hidden">
+        <Button onClick={handleSave} disabled={!title.trim() || !text.trim() || isSaving} size="lg" className="w-full max-w-xs">
+          <Save className="mr-2 h-5 w-5" />
+          {isSaving ? "Saving..." : "Save Entry"}
+        </Button>
       </div>
     </div>
   )

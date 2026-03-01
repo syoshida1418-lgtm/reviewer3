@@ -63,9 +63,9 @@ export const storageUtils = {
     return localEntries
   },
 
-  saveDiaryEntry: (entry: DiaryEntry): void => {
+  saveDiaryEntry: async (entry: DiaryEntry): Promise<void> => {
     if (typeof window === "undefined") return
-    const entries = storageUtils.getDiaryEntries()
+    const entries = await storageUtils.getDiaryEntries()
     const existingIndex = entries.findIndex((e) => e.id === entry.id)
 
     if (existingIndex >= 0) {
@@ -75,8 +75,66 @@ export const storageUtils = {
     }
 
     localStorage.setItem(DIARY_ENTRIES_KEY, JSON.stringify(entries))
-    // Fire-and-forget: try to save to server-side cloud API as well
-    ;(async () => {
+
+    // オフライン時は未同期リストに追加
+    if (!navigator.onLine) {
+      const unsynced = JSON.parse(localStorage.getItem("unsynced-diary-entries") || "[]")
+      unsynced.push(entry)
+      localStorage.setItem("unsynced-diary-entries", JSON.stringify(unsynced))
+      return
+    }
+
+    // オンライン時はサーバーへ送信
+    try {
+      await fetch("/api/diary", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(entry),
+      })
+    } catch (err) {
+      // サーバー送信失敗時は未同期リストに追加
+      const unsynced = JSON.parse(localStorage.getItem("unsynced-diary-entries") || "[]")
+      unsynced.push(entry)
+      localStorage.setItem("unsynced-diary-entries", JSON.stringify(unsynced))
+      console.warn("Cloud save failed:", err)
+    }
+  },
+
+  deleteDiaryEntry: async (id: string): Promise<void> => {
+    if (typeof window === "undefined") return
+    const entries = await storageUtils.getDiaryEntries()
+    const filtered = entries.filter((e) => e.id !== id)
+    localStorage.setItem(DIARY_ENTRIES_KEY, JSON.stringify(filtered))
+
+    // オフライン時は未同期削除リストに追加
+    if (!navigator.onLine) {
+      const unsyncedDeletes = JSON.parse(localStorage.getItem("unsynced-diary-deletes") || "[]")
+      unsyncedDeletes.push(id)
+      localStorage.setItem("unsynced-diary-deletes", JSON.stringify(unsyncedDeletes))
+      return
+    }
+
+    // オンライン時はサーバーへ送信
+    try {
+      await fetch("/api/diary", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id }),
+      })
+    } catch (err) {
+      // サーバー送信失敗時は未同期削除リストに追加
+      const unsyncedDeletes = JSON.parse(localStorage.getItem("unsynced-diary-deletes") || "[]")
+      unsyncedDeletes.push(id)
+      localStorage.setItem("unsynced-diary-deletes", JSON.stringify(unsyncedDeletes))
+      console.warn("Cloud delete failed:", err)
+    }
+  },
+  // オンライン復帰時に未同期データをサーバーへ送信
+  syncUnsyncedDiaryEntries: async (): Promise<void> => {
+    if (typeof window === "undefined" || !navigator.onLine) return
+    // 保存
+    const unsynced = JSON.parse(localStorage.getItem("unsynced-diary-entries") || "[]")
+    for (const entry of unsynced) {
       try {
         await fetch("/api/diary", {
           method: "POST",
@@ -84,18 +142,13 @@ export const storageUtils = {
           body: JSON.stringify(entry),
         })
       } catch (err) {
-        // ignore cloud errors in client
-        console.warn("Cloud save failed:", err)
+        console.warn("syncUnsyncedDiaryEntries save failed:", err)
       }
-    })()
-  },
-
-  deleteDiaryEntry: (id: string): void => {
-    if (typeof window === "undefined") return
-    const entries = storageUtils.getDiaryEntries()
-    const filtered = entries.filter((e) => e.id !== id)
-    localStorage.setItem(DIARY_ENTRIES_KEY, JSON.stringify(filtered))
-    ;(async () => {
+    }
+    localStorage.removeItem("unsynced-diary-entries")
+    // 削除
+    const unsyncedDeletes = JSON.parse(localStorage.getItem("unsynced-diary-deletes") || "[]")
+    for (const id of unsyncedDeletes) {
       try {
         await fetch("/api/diary", {
           method: "DELETE",
@@ -103,9 +156,10 @@ export const storageUtils = {
           body: JSON.stringify({ id }),
         })
       } catch (err) {
-        console.warn("Cloud delete failed:", err)
+        console.warn("syncUnsyncedDiaryEntries delete failed:", err)
       }
-    })()
+    }
+    localStorage.removeItem("unsynced-diary-deletes")
   },
 
   // Optional explicit cloud helpers
