@@ -145,7 +145,7 @@ function DiaryEntryForm({ entry, onSave, onCancel }: DiaryEntryFormProps) {
             <Button variant="outline" onClick={onCancel} size="sm" className="sm:size-md">
               Cancel
             </Button>
-            <Button variant="default" onClick={handleSave} size="sm" className="sm:size-md">
+            <Button type="button" variant="default" onClick={handleSave} disabled={!title.trim() || !text.trim() || isSaving || !isOnline} size="sm" className="sm:size-md">
               <Save className="mr-2 h-4 w-4" />保存
             </Button>
           </div>
