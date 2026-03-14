@@ -81,16 +81,17 @@ function DiaryEntryForm({ entry, onSave, onCancel }: DiaryEntryFormProps) {
             reviewHistory: existing.reviewHistory ? [...existing.reviewHistory, result] : [result],
             correctedText: result.correctedText || existing.correctedText,
             corrections: result.corrections || existing.corrections,
-            grammarScore: result.grammarScore ?? existing.grammarScore
+            grammarScore: result.grammarScore ?? existing.grammarScore,
+            naturalnessScore: result.naturalnessScore ?? existing.naturalnessScore,
+            overallRating: result.overallRating ?? existing.overallRating,
           };
           await storageUtils.saveDiaryEntry(updated);
-          onSave(updated);
         }
       }
-      } catch (err) {
-        console.warn("auto-save review failed:", err)
-      }
+    } catch (err) {
+      console.warn("auto-save review failed:", err)
     }
+  }
 
   const handleSave = async () => {
     if (!title.trim() || !text.trim() || !isOnline) return
