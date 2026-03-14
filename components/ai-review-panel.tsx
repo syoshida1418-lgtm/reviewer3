@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import React, { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -14,7 +14,7 @@ import { storageUtils } from "@/lib/storage"
 
 interface AIReviewPanelProps {
   text: string
-  onReviewComplete: (result: ReviewResult) => void
+  onReviewComplete?: (result: ReviewResult) => void
 }
 
 export function AIReviewPanel({ text, onReviewComplete }: AIReviewPanelProps) {
@@ -22,6 +22,7 @@ export function AIReviewPanel({ text, onReviewComplete }: AIReviewPanelProps) {
   const [reviewResult, setReviewResult] = useState<ReviewResult | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [isOnline, setIsOnline] = useState(typeof window !== "undefined" ? navigator.onLine : true)
+  const [bookmarkedIds, setBookmarkedIds] = useState<string[]>([]);
 
   // ネットワーク状態監視
   React.useEffect(() => {
@@ -40,9 +41,35 @@ export function AIReviewPanel({ text, onReviewComplete }: AIReviewPanelProps) {
     setIsReviewing(true)
     setError(null)
     try {
-      const result = await reviewText(text)
+      // API経由でAIレビュー
+      const res = await fetch("/api/review", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text })
+      })
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.error || "AIレビューAPIエラー")
+      const result = data.result
       setReviewResult(result)
-      onReviewComplete(result)
+      if (onReviewComplete) {
+        onReviewComplete(result)
+      }
+
+      // Supabase保存処理
+      try {
+        const entry = {
+          id: crypto.randomUUID(),
+          title: "AI Review",
+          originalText: text,
+          memo: "",
+          tags: [],
+          reviewResult: result
+        }
+        const { saveReviewToSupabase } = await import("@/lib/save-review-to-supabase")
+        await saveReviewToSupabase(entry)
+      } catch (saveError) {
+        setError("AI判定結果のクラウド保存に失敗しました: " + (saveError instanceof Error ? saveError.message : "保存エラー"))
+      }
     } catch (error) {
       console.error("Review failed:", error)
       setError(error instanceof Error ? error.message : "AIレビューの実行中にエラーが発生しました。")
@@ -227,6 +254,17 @@ export function AIReviewPanel({ text, onReviewComplete }: AIReviewPanelProps) {
                   <div key={correction.id} className="border rounded-lg p-4 space-y-3">
                     <div className="flex items-center justify-between">
                       <Badge className={getCorrectionTypeColor(correction.type)}>{correction.type}</Badge>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="ml-2"
+                        onClick={() => {
+                          handleBookmarkCorrection(correction, index);
+                          setBookmarkedIds((prev) => [...prev, correction.id]);
+                        }}
+                      >
+                        <Bookmark className={`h-4 w-4 mr-1 ${bookmarkedIds.includes(correction.id) ? "fill-black text-black" : ""}`} />Bookmark
+                      </Button>
                     </div>
 
                     <div className="space-y-2">

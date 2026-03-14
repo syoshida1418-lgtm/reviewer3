@@ -13,7 +13,7 @@ interface CalendarViewProps {
   onNewEntry: (date: Date) => void
 }
 
-export function CalendarView({ entries, onDateSelect, onEntrySelect, onNewEntry }: CalendarViewProps) {
+function CalendarView({ entries, onDateSelect, onEntrySelect, onNewEntry }: CalendarViewProps) {
   const [currentDate, setCurrentDate] = useState(new Date())
 
   const { calendarDays, monthYear } = useMemo(() => {
@@ -208,3 +208,4 @@ export function CalendarView({ entries, onDateSelect, onEntrySelect, onNewEntry 
     </Card>
   )
 }
+export default CalendarView;

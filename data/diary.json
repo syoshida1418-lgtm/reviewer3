@@ -116,5 +116,612 @@
     ],
     "createdAt": "2026-02-18T20:56:33.514Z",
     "updatedAt": "2026-02-18T20:56:33.514Z"
+  },
+  {
+    "id": "b3494811-7d53-4e95-bb8f-93c5fe1f6f82",
+    "title": "test",
+    "originalText": "I whad play date for Saaya in my house.I thought very easy to play in house. Because they can’t go to far, we can have a sit, all time.Tomorrow we have play date in Saaya’s house. I will fun.",
+    "memo": "stee",
+    "correctedText": "I had a play date for Saaya at my house. I thought it would be very easy to play at home because they can't go far, so we can sit and relax all the time. Tomorrow we have a play date at Saaya's house. I will have fun.",
+    "corrections": [
+      {
+        "id": "1",
+        "originalText": "I whad play date for Saaya in my house.",
+        "correctedText": "I had a play date for Saaya at my house.",
+        "reason": "「whad」は「had」のスペルミスです。また、「play date」は可算名詞なので冠詞「a」が必要です。「in my house」は不自然なので「at my house」とします。",
+        "type": "spelling"
+      },
+      {
+        "id": "2",
+        "originalText": "I thought very easy to play in house.",
+        "correctedText": "I thought it would be very easy to play at home.",
+        "reason": "「thought」の後には「it」が必要です。「in house」は不自然なので「at home」とします。また、文の流れを自然にするために「would be」を追加しました。",
+        "type": "grammar"
+      },
+      {
+        "id": "3",
+        "originalText": "Because they can’t go to far, we can have a sit, all time.",
+        "correctedText": "because they can't go far, so we can sit and relax all the time.",
+        "reason": "「to far」は誤りで「far」だけで十分です。「have a sit」は不自然なので「sit」または「sit and relax」とします。「all time」は「all the time」とします。",
+        "type": "grammar"
+      },
+      {
+        "id": "4",
+        "originalText": "I will fun.",
+        "correctedText": "I will have fun.",
+        "reason": "「fun」は名詞なので、動詞の「have」を追加して「I will have fun」とします。",
+        "type": "grammar"
+      }
+    ],
+    "reviewHistory": [
+      {
+        "correctedText": "I had a play date with Saaya at my house. I thought it would be very easy to play at home because they wouldn't have to go far, so we could just relax. Tomorrow, we have a play date at Saaya's house. I will have fun.",
+        "corrections": [
+          {
+            "id": "1",
+            "originalText": "I whad play date for Saaya in my house.",
+            "correctedText": "I had a play date with Saaya at my house.",
+            "reason": "「whad」は「had」のスペルミスです。「for」の代わりに「with」を使い、「in my house」はより自然な「at my house」に修正しました。",
+            "type": "spelling"
+          },
+          {
+            "id": "2",
+            "originalText": "I thought very easy to play in house.",
+            "correctedText": "I thought it would be very easy to play at home.",
+            "reason": "文法的に不完全です。「it would be」を追加して文の構造を整え、「in house」は「at home」とするのが自然です。",
+            "type": "grammar"
+          },
+          {
+            "id": "3",
+            "originalText": "Because they can’t go to far, we can have a sit, all time.",
+            "correctedText": "because they wouldn't have to go far, so we could just relax.",
+            "reason": "「can't go to far」は「wouldn't have to go far（あまり行かなくて済む）」が適切です。「have a sit」は「座る」という意味ですが、「relax（リラックスする）」の方がこの文脈に自然です。",
+            "type": "naturalness"
+          },
+          {
+            "id": "4",
+            "originalText": "I will fun.",
+            "correctedText": "I will have fun.",
+            "reason": "「fun」は名詞なので、動詞の「have」を加えて「I will have fun（楽しむ）」とします。",
+            "type": "grammar"
+          }
+        ],
+        "grammarScore": 65,
+        "naturalnessScore": 55,
+        "overallRating": 2
+      },
+      {
+        "correctedText": "I had a play date at Saaya's house. I thought it would be very easy to play at home because they wouldn't have to go far, so we could sit and relax the whole time. Tomorrow, we have a play date at Saaya's house. I will have fun.",
+        "corrections": [
+          {
+            "id": "1",
+            "originalText": "I whad play date for Saaya in my house.",
+            "correctedText": "I had a play date at Saaya's house.",
+            "reason": "「whad」は「had」のスペルミスです。前置詞「for」や「in my house」の代わりに、自然な表現として「at Saaya's house」を使います。",
+            "type": "spelling"
+          },
+          {
+            "id": "2",
+            "originalText": "I thought very easy to play in house.",
+            "correctedText": "I thought it would be very easy to play at home",
+            "reason": "文の構造が不完全です。「it would be」を追加して「it is easy」のニュアンスを表し、「in house」は「at home」とするのが自然です。",
+            "type": "grammar"
+          },
+          {
+            "id": "3",
+            "originalText": "Because they can’t go to far, we can have a sit, all time.",
+            "correctedText": "because they wouldn't have to go far, so we could sit and relax the whole time.",
+            "reason": "「can't go to far」は「go far（遠くへ行く）」が正しいです。時制を過去形に統一し、「have a sit」は動詞の「sit」を使い、「all time」は「the whole time」とするのが自然です。",
+            "type": "grammar"
+          },
+          {
+            "id": "4",
+            "originalText": "I will fun.",
+            "correctedText": "I will have fun.",
+            "reason": "「fun」は名詞なので、動詞の「have」を加えて「I will have fun（楽しむでしょう）」とします。",
+            "type": "grammar"
+          }
+        ],
+        "grammarScore": 65,
+        "naturalnessScore": 60,
+        "overallRating": 3
+      },
+      {
+        "correctedText": "I had a play date with Saaya at my house. I thought it would be very easy to play at home because they wouldn't have to go far, so we could just relax. Tomorrow we have a play date at Saaya's house. I think it will be fun.",
+        "corrections": [
+          {
+            "id": "1",
+            "originalText": "I whad play date for Saaya in my house.",
+            "correctedText": "I had a play date with Saaya at my house.",
+            "reason": "「whad」は「had」のスペルミスです。「for」の代わりに「with」を使い、相手を示します。「in my house」は文法的に正しいですが、「at my house」の方がより自然です。",
+            "type": "spelling"
+          },
+          {
+            "id": "2",
+            "originalText": "I thought very easy to play in house.",
+            "correctedText": "I thought it would be very easy to play at home.",
+            "reason": "「thought」の後には「it」が必要です。また、「in house」は「at home」と言うのが自然です。",
+            "type": "grammar"
+          },
+          {
+            "id": "3",
+            "originalText": "Because they can’t go to far, we can have a sit, all time.",
+            "correctedText": "because they wouldn't have to go far, so we could just relax.",
+            "reason": "「can't go to far」は「wouldn't have to go far（あまり遠くに行かなくても済む）」のように、仮定法で表現する方が自然です。「have a sit」は「sit down」か「relax」が適切です。「all time」は不要です。",
+            "type": "naturalness"
+          },
+          {
+            "id": "4",
+            "originalText": "I will fun.",
+            "correctedText": "I think it will be fun.",
+            "reason": "「fun」は形容詞なので、動詞の「be」が必要です。文の構造を整え、より自然な表現にしました。",
+            "type": "grammar"
+          }
+        ],
+        "grammarScore": 65,
+        "naturalnessScore": 55,
+        "overallRating": 2
+      },
+      {
+        "correctedText": "I had a play date with Saaya at my house. I thought it would be very easy to play at home because they wouldn't have to go far, so we could just relax. Tomorrow, we have a play date at Saaya's house. I think it will be fun.",
+        "corrections": [
+          {
+            "id": "1",
+            "originalText": "I whad play date for Saaya in my house.",
+            "correctedText": "I had a play date with Saaya at my house.",
+            "reason": "「whad」は「had」のスペルミスです。「for」の代わりに「with」を使い、相手を表します。「in my house」より「at my house」の方が自然です。",
+            "type": "spelling"
+          },
+          {
+            "id": "2",
+            "originalText": "I thought very easy to play in house.",
+            "correctedText": "I thought it would be very easy to play at home.",
+            "reason": "文の構造が不完全です。「it would be」を追加して文を完成させます。「in house」は「at home」と言うのが自然です。",
+            "type": "grammar"
+          },
+          {
+            "id": "3",
+            "originalText": "Because they can’t go to far, we can have a sit, all time.",
+            "correctedText": "because they wouldn't have to go far, so we could just relax.",
+            "reason": "「to far」は「too far」です。文の流れを自然にするために、「can」を仮定法の「could」に変え、「have a sit」を「relax（くつろぐ）」という自然な表現に修正しました。",
+            "type": "grammar"
+          },
+          {
+            "id": "4",
+            "originalText": "I will fun.",
+            "correctedText": "I think it will be fun.",
+            "reason": "「fun」は名詞なので、動詞の「be」が必要です。文として成立させるために「I think it will be fun」と修正しました。",
+            "type": "grammar"
+          }
+        ],
+        "grammarScore": 45,
+        "naturalnessScore": 40,
+        "overallRating": 2
+      },
+      {
+        "correctedText": "I had a play date for Saaya at my house. I thought it would be very easy to play at home because they can't go far, so we can sit and relax all the time. Tomorrow we have a play date at Saaya's house. I will have fun.",
+        "corrections": [
+          {
+            "id": "1",
+            "originalText": "I whad play date for Saaya in my house.",
+            "correctedText": "I had a play date for Saaya at my house.",
+            "reason": "「whad」は「had」のスペルミスです。また、「play date」は可算名詞なので「a」を付け、「in my house」は「at my house」とするのが自然です。",
+            "type": "spelling"
+          },
+          {
+            "id": "2",
+            "originalText": "I thought very easy to play in house.",
+            "correctedText": "I thought it would be very easy to play at home.",
+            "reason": "「thought」の後には「it」が必要です。「in house」は「at home」と表現するのが自然です。また、「would」を加えることで、未来の可能性を表すニュアンスになります。",
+            "type": "grammar"
+          },
+          {
+            "id": "3",
+            "originalText": "Because they can’t go to far, we can have a sit, all time.",
+            "correctedText": "because they can't go far, so we can sit and relax all the time.",
+            "reason": "「to far」は「far」だけで十分です。「have a sit」は「sit」または「sit down」が自然です。「all time」は「all the time」とします。文の流れを滑らかにするために「so」を追加しました。",
+            "type": "naturalness"
+          },
+          {
+            "id": "4",
+            "originalText": "Tomorrow we have play date in Saaya’s house.",
+            "correctedText": "Tomorrow we have a play date at Saaya's house.",
+            "reason": "「play date」は可算名詞なので「a」を付けます。「in」は場所を表す場合「at」を使うのが一般的です。",
+            "type": "grammar"
+          },
+          {
+            "id": "5",
+            "originalText": "I will fun.",
+            "correctedText": "I will have fun.",
+            "reason": "「fun」は名詞なので、動詞の「have」を加えて「I will have fun」とします。",
+            "type": "grammar"
+          }
+        ],
+        "grammarScore": 75,
+        "naturalnessScore": 70,
+        "overallRating": 3
+      },
+      {
+        "correctedText": "I had a play date for Saaya at my house. I thought it would be very easy to play at home because they can't go far, so we can sit all the time. Tomorrow we have a play date at Saaya's house. I will have fun.",
+        "corrections": [
+          {
+            "id": "1",
+            "originalText": "I whad play date for Saaya in my house.",
+            "correctedText": "I had a play date for Saaya at my house.",
+            "reason": "「whad」は「had」のスペルミスです。冠詞「a」を追加し、場所を表す前置詞を「at」に変更することで、自然な表現になります。",
+            "type": "spelling"
+          },
+          {
+            "id": "2",
+            "originalText": "I thought very easy to play in house.",
+            "correctedText": "I thought it would be very easy to play at home.",
+            "reason": "文の構造が不完全です。「it would be」を追加し、主語と動詞を明確にします。「in house」は「at home」に変更することで、より自然な表現になります。",
+            "type": "grammar"
+          },
+          {
+            "id": "3",
+            "originalText": "Because they can’t go to far, we can have a sit, all time.",
+            "correctedText": "because they can't go far, so we can sit all the time.",
+            "reason": "「to far」は「far」が正しいです。「have a sit」は「sit」に変更し、「all time」は「all the time」に修正することで、自然な表現になります。",
+            "type": "grammar"
+          },
+          {
+            "id": "4",
+            "originalText": "Tomorrow we have play date in Saaya’s house.",
+            "correctedText": "Tomorrow we have a play date at Saaya's house.",
+            "reason": "冠詞「a」を追加し、場所を表す前置詞を「at」に変更することで、文法的に正しくなります。",
+            "type": "grammar"
+          },
+          {
+            "id": "5",
+            "originalText": "I will fun.",
+            "correctedText": "I will have fun.",
+            "reason": "「fun」は名詞なので、動詞「have」を追加して「I will have fun」とすることで、文法的に正しくなります。",
+            "type": "grammar"
+          }
+        ],
+        "grammarScore": 75,
+        "naturalnessScore": 70,
+        "overallRating": 3
+      },
+      {
+        "correctedText": "I had a play date for Saaya at my house. I thought it would be very easy to play at home because they can't go far, so we can sit and relax all the time. Tomorrow we have a play date at Saaya's house. I will have fun.",
+        "corrections": [
+          {
+            "id": "1",
+            "originalText": "I whad play date for Saaya in my house.",
+            "correctedText": "I had a play date for Saaya at my house.",
+            "reason": "「whad」は「had」のスペルミスです。また、「play date」は可算名詞なので冠詞「a」が必要です。「in my house」は「at my house」と言う方が自然です。",
+            "type": "spelling"
+          },
+          {
+            "id": "2",
+            "originalText": "I thought very easy to play in house.",
+            "correctedText": "I thought it would be very easy to play at home.",
+            "reason": "「thought」の後には「it」が必要です。「in house」は「at home」と言う方が自然です。また、「would」を加えることで、未来の可能性を表す丁寧な表現になります。",
+            "type": "grammar"
+          },
+          {
+            "id": "3",
+            "originalText": "Because they can’t go to far, we can have a sit, all time.",
+            "correctedText": "because they can't go far, so we can sit and relax all the time.",
+            "reason": "「to far」は「far」だけで十分です。「have a sit」は「sit」または「sit down」が自然です。「all time」は「all the time」です。文の流れを滑らかにするために「so」を追加しました。",
+            "type": "grammar"
+          },
+          {
+            "id": "4",
+            "originalText": "Tomorrow we have play date in Saaya’s house.",
+            "correctedText": "Tomorrow we have a play date at Saaya's house.",
+            "reason": "「play date」は可算名詞なので冠詞「a」が必要です。「in Saaya's house」は「at Saaya's house」と言う方が自然です。",
+            "type": "grammar"
+          },
+          {
+            "id": "5",
+            "originalText": "I will fun.",
+            "correctedText": "I will have fun.",
+            "reason": "「fun」は名詞なので、動詞の「have」を加えて「I will have fun」とする必要があります。",
+            "type": "grammar"
+          }
+        ],
+        "grammarScore": 75,
+        "naturalnessScore": 70,
+        "overallRating": 3
+      },
+      {
+        "correctedText": "I had a play date for Saaya at my house. I thought it would be very easy to play at home because they can't go far, so we can sit and relax all the time. Tomorrow we have a play date at Saaya's house. I will have fun.",
+        "corrections": [
+          {
+            "id": "1",
+            "originalText": "I whad play date for Saaya in my house.",
+            "correctedText": "I had a play date for Saaya at my house.",
+            "reason": "「whad」は「had」のスペルミスです。また、「play date」は可算名詞なので「a」を付け、「in my house」は「at my house」とするのが自然です。",
+            "type": "spelling"
+          },
+          {
+            "id": "2",
+            "originalText": "I thought very easy to play in house.",
+            "correctedText": "I thought it would be very easy to play at home.",
+            "reason": "「thought」の後には「it」が必要で、文法的に不完全です。「in house」は「at home」と表現するのが自然です。",
+            "type": "grammar"
+          },
+          {
+            "id": "3",
+            "originalText": "Because they can’t go to far, we can have a sit, all time.",
+            "correctedText": "because they can't go far, so we can sit and relax all the time.",
+            "reason": "「to far」は「far」だけで十分です。「have a sit」は不自然で、「sit」か「sit down」が適切です。「all time」は「all the time」とします。",
+            "type": "naturalness"
+          },
+          {
+            "id": "4",
+            "originalText": "Tomorrow we have play date in Saaya’s house.",
+            "correctedText": "Tomorrow we have a play date at Saaya's house.",
+            "reason": "「play date」には冠詞「a」が必要です。「in」は施設や場所に対して「at」を使うのが自然です。",
+            "type": "grammar"
+          },
+          {
+            "id": "5",
+            "originalText": "I will fun.",
+            "correctedText": "I will have fun.",
+            "reason": "「fun」は名詞なので、動詞の「have」を付けて「I will have fun」とする必要があります。",
+            "type": "grammar"
+          }
+        ],
+        "grammarScore": 70,
+        "naturalnessScore": 65,
+        "overallRating": 3
+      },
+      {
+        "correctedText": "I had a play date for Saaya at my house. I thought it would be very easy to play at home because they can't go far, so we can sit all the time. Tomorrow we have a play date at Saaya's house. I will have fun.",
+        "corrections": [
+          {
+            "id": "1",
+            "originalText": "I whad play date for Saaya in my house.",
+            "correctedText": "I had a play date for Saaya at my house.",
+            "reason": "「whad」は「had」のスペルミスです。また、「play date」は可算名詞なので冠詞「a」が必要です。「in my house」は不自然なので「at my house」に修正します。",
+            "type": "spelling"
+          },
+          {
+            "id": "2",
+            "originalText": "I thought very easy to play in house.",
+            "correctedText": "I thought it would be very easy to play at home.",
+            "reason": "「thought」の後には「it」が必要です。また、「in house」は不自然なので「at home」に修正します。文の構造を完全にするために「would be」を追加します。",
+            "type": "grammar"
+          },
+          {
+            "id": "3",
+            "originalText": "Because they can’t go to far, we can have a sit, all time.",
+            "correctedText": "because they can't go far, so we can sit all the time.",
+            "reason": "「to far」は誤りで、「far」だけで十分です。「have a sit」は不自然なので「sit」に修正します。「all time」は「all the time」が正しい表現です。",
+            "type": "grammar"
+          },
+          {
+            "id": "4",
+            "originalText": "Tomorrow we have play date in Saaya’s house.",
+            "correctedText": "Tomorrow we have a play date at Saaya's house.",
+            "reason": "「play date」には冠詞「a」が必要です。「in」は場所に対して不自然なので「at」に修正します。",
+            "type": "grammar"
+          },
+          {
+            "id": "5",
+            "originalText": "I will fun.",
+            "correctedText": "I will have fun.",
+            "reason": "「fun」は名詞なので、動詞「have」を追加して「I will have fun」とします。",
+            "type": "grammar"
+          }
+        ],
+        "grammarScore": 75,
+        "naturalnessScore": 70,
+        "overallRating": 3
+      },
+      {
+        "correctedText": "I had a play date for Saaya at my house. I thought it would be very easy to play at home because they can't go far, so we can sit and relax all the time. Tomorrow we have a play date at Saaya's house. I will have fun.",
+        "corrections": [
+          {
+            "id": "1",
+            "originalText": "I whad play date for Saaya in my house.",
+            "correctedText": "I had a play date for Saaya at my house.",
+            "reason": "「whad」は「had」のスペルミスです。また、「play date」は可算名詞なので冠詞「a」が必要です。「in my house」は不自然なので「at my house」に修正します。",
+            "type": "spelling"
+          },
+          {
+            "id": "2",
+            "originalText": "I thought very easy to play in house.",
+            "correctedText": "I thought it would be very easy to play at home.",
+            "reason": "「thought」の後には「it」が必要です。「in house」は不自然なので「at home」に修正します。また、文の流れを自然にするために「would be」を追加します。",
+            "type": "grammar"
+          },
+          {
+            "id": "3",
+            "originalText": "Because they can’t go to far, we can have a sit, all time.",
+            "correctedText": "because they can't go far, so we can sit and relax all the time.",
+            "reason": "「to far」は誤りで、「far」は副詞なので「to」は不要です。「have a sit」は不自然で、「sit」または「sit down」が適切です。「all time」は「all the time」に修正します。",
+            "type": "grammar"
+          },
+          {
+            "id": "4",
+            "originalText": "Tomorrow we have play date in Saaya’s house.",
+            "correctedText": "Tomorrow we have a play date at Saaya's house.",
+            "reason": "「play date」は可算名詞なので冠詞「a」が必要です。「in」は不自然なので「at」に修正します。",
+            "type": "grammar"
+          },
+          {
+            "id": "5",
+            "originalText": "I will fun.",
+            "correctedText": "I will have fun.",
+            "reason": "「fun」は名詞なので、動詞「have」を追加して「I will have fun」とします。",
+            "type": "grammar"
+          }
+        ],
+        "grammarScore": 75,
+        "naturalnessScore": 70,
+        "overallRating": 3
+      },
+      {
+        "correctedText": "I had a play date for Saaya at my house. I thought it would be very easy to play at home because they can't go far, so we can sit and relax all the time. Tomorrow we have a play date at Saaya's house. I will have fun.",
+        "corrections": [
+          {
+            "id": "1",
+            "originalText": "I whad play date for Saaya in my house.",
+            "correctedText": "I had a play date for Saaya at my house.",
+            "reason": "「whad」は「had」のスペルミスです。また、「play date」は可算名詞なので「a」を付け、「in my house」は「at my house」とするのが自然です。",
+            "type": "spelling"
+          },
+          {
+            "id": "2",
+            "originalText": "I thought very easy to play in house.",
+            "correctedText": "I thought it would be very easy to play at home.",
+            "reason": "「thought」の後には「it」が必要です。「in house」は「at home」と表現するのが自然です。また、「would」を加えることで、未来の可能性を表すニュアンスになります。",
+            "type": "grammar"
+          },
+          {
+            "id": "3",
+            "originalText": "Because they can’t go to far, we can have a sit, all time.",
+            "correctedText": "because they can't go far, so we can sit and relax all the time.",
+            "reason": "「to far」は「far」だけで十分です。「have a sit」は「sit」または「sit down」が自然です。「all time」は「all the time」が正しい表現です。文の流れを滑らかにするために「so」を追加しました。",
+            "type": "grammar"
+          },
+          {
+            "id": "4",
+            "originalText": "I will fun.",
+            "correctedText": "I will have fun.",
+            "reason": "「fun」は名詞なので、動詞の「have」を加えて「I will have fun」とする必要があります。",
+            "type": "grammar"
+          }
+        ],
+        "grammarScore": 75,
+        "naturalnessScore": 70,
+        "overallRating": 3
+      },
+      {
+        "correctedText": "I had a play date for Saaya at my house. I thought it would be very easy to play at home because they can't go far, so we can sit all the time. Tomorrow we have a play date at Saaya's house. I will have fun.",
+        "corrections": [
+          {
+            "id": "1",
+            "originalText": "I whad play date for Saaya in my house.",
+            "correctedText": "I had a play date for Saaya at my house.",
+            "reason": "「whad」は「had」のスペルミスです。冠詞「a」を追加し、「in」を「at」に変更することで、自然な表現になります。",
+            "type": "spelling"
+          },
+          {
+            "id": "2",
+            "originalText": "I thought very easy to play in house.",
+            "correctedText": "I thought it would be very easy to play at home.",
+            "reason": "文が不完全なので、主語「it」と助動詞「would be」を追加して補います。「in house」は「at home」の方が自然です。",
+            "type": "grammar"
+          },
+          {
+            "id": "3",
+            "originalText": "Because they can’t go to far, we can have a sit, all time.",
+            "correctedText": "because they can't go far, so we can sit all the time.",
+            "reason": "「to far」は「far」が正しいです。「have a sit」は「sit」が自然です。「all time」は「all the time」に修正します。接続詞「so」を追加して文をつなげます。",
+            "type": "grammar"
+          },
+          {
+            "id": "4",
+            "originalText": "Tomorrow we have play date in Saaya’s house.",
+            "correctedText": "Tomorrow we have a play date at Saaya's house.",
+            "reason": "冠詞「a」を追加し、「in」を「at」に変更することで、自然な表現になります。",
+            "type": "grammar"
+          },
+          {
+            "id": "5",
+            "originalText": "I will fun.",
+            "correctedText": "I will have fun.",
+            "reason": "「fun」は名詞なので、動詞「have」を追加して「I will have fun」とします。",
+            "type": "grammar"
+          }
+        ],
+        "grammarScore": 70,
+        "naturalnessScore": 65,
+        "overallRating": 3
+      },
+      {
+        "correctedText": "I had a play date for Saaya at my house. I thought it would be very easy to play at home because they can't go far, so we can sit and relax all the time. Tomorrow we have a play date at Saaya's house. I will have fun.",
+        "corrections": [
+          {
+            "id": "1",
+            "originalText": "I whad play date for Saaya in my house.",
+            "correctedText": "I had a play date for Saaya at my house.",
+            "reason": "「whad」は「had」のスペルミスです。また、「play date」は可算名詞なので冠詞「a」が必要です。「in my house」は不自然なので「at my house」に修正します。",
+            "type": "spelling"
+          },
+          {
+            "id": "2",
+            "originalText": "I thought very easy to play in house.",
+            "correctedText": "I thought it would be very easy to play at home.",
+            "reason": "「thought」の後には「it」が必要です。「in house」は不自然なので「at home」に修正します。また、文の流れを自然にするために「would be」を追加します。",
+            "type": "grammar"
+          },
+          {
+            "id": "3",
+            "originalText": "Because they can’t go to far, we can have a sit, all time.",
+            "correctedText": "because they can't go far, so we can sit and relax all the time.",
+            "reason": "「to far」は「far」の誤りです。「have a sit」は不自然なので「sit」に修正します。「all time」は「all the time」に修正します。また、文の流れを自然にするために「so」を追加します。",
+            "type": "grammar"
+          },
+          {
+            "id": "4",
+            "originalText": "Tomorrow we have play date in Saaya’s house.",
+            "correctedText": "Tomorrow we have a play date at Saaya's house.",
+            "reason": "「play date」は可算名詞なので冠詞「a」が必要です。「in Saaya's house」は不自然なので「at Saaya's house」に修正します。",
+            "type": "grammar"
+          },
+          {
+            "id": "5",
+            "originalText": "I will fun.",
+            "correctedText": "I will have fun.",
+            "reason": "「fun」は名詞なので、動詞「have」を追加して「I will have fun」とします。",
+            "type": "grammar"
+          }
+        ],
+        "grammarScore": 75,
+        "naturalnessScore": 70,
+        "overallRating": 3
+      },
+      {
+        "correctedText": "I had a play date for Saaya at my house. I thought it would be very easy to play at home because they can't go far, so we can sit and relax all the time. Tomorrow we have a play date at Saaya's house. I will have fun.",
+        "corrections": [
+          {
+            "id": "1",
+            "originalText": "I whad play date for Saaya in my house.",
+            "correctedText": "I had a play date for Saaya at my house.",
+            "reason": "「whad」は「had」のスペルミスです。また、「play date」は可算名詞なので冠詞「a」が必要です。「in my house」は不自然なので「at my house」とします。",
+            "type": "spelling"
+          },
+          {
+            "id": "2",
+            "originalText": "I thought very easy to play in house.",
+            "correctedText": "I thought it would be very easy to play at home.",
+            "reason": "「thought」の後には「it」が必要です。「in house」は不自然なので「at home」とします。また、文の流れを自然にするために「would be」を追加しました。",
+            "type": "grammar"
+          },
+          {
+            "id": "3",
+            "originalText": "Because they can’t go to far, we can have a sit, all time.",
+            "correctedText": "because they can't go far, so we can sit and relax all the time.",
+            "reason": "「to far」は誤りで「far」だけで十分です。「have a sit」は不自然なので「sit」または「sit and relax」とします。「all time」は「all the time」とします。",
+            "type": "grammar"
+          },
+          {
+            "id": "4",
+            "originalText": "I will fun.",
+            "correctedText": "I will have fun.",
+            "reason": "「fun」は名詞なので、動詞の「have」を追加して「I will have fun」とします。",
+            "type": "grammar"
+          }
+        ],
+        "grammarScore": 75,
+        "naturalnessScore": 70,
+        "overallRating": 3
+      }
+    ],
+    "grammarScore": 75,
+    "naturalnessScore": 55,
+    "overallRating": 2,
+    "tags": [
+      "test"
+    ],
+    "createdAt": "2026-03-09T23:14:23.211Z",
+    "updatedAt": "2026-03-09T23:14:23.211Z"
   }
 ]

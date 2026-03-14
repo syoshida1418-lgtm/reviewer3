@@ -27,3 +27,30 @@ yarn-error.log*
 next-env.d.ts
 .vercel
 .env*.local
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Supabase keys
+supabase.env
+
+# Local data
+/data/
+
+# Misc
+*.swp
+*.swo
+
+# VSCode
+.vscode/
+
+# Yarn/Pnpm
+.pnpm/
+.yarn/
+
+# Coverage
+coverage/
+
+# Other
+public/sw.js

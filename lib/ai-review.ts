@@ -1,4 +1,3 @@
-"use server"
 
 import type { ReviewResult } from "./types"
 
@@ -43,10 +42,26 @@ export async function reviewText(text: string): Promise<ReviewResult> {
 
   const raw = generated.trim()
 
+  // JSON部分のみ抽出
+  let jsonStr = raw
+  const jsonStart = raw.indexOf("{")
+  const jsonEnd = raw.lastIndexOf("}")
+  if (jsonStart !== -1 && jsonEnd !== -1 && jsonEnd > jsonStart) {
+    jsonStr = raw.substring(jsonStart, jsonEnd + 1)
+  }
+
+  // reasonフィールドのダブルクォート抜けを補正
+  jsonStr = jsonStr.replace(/("reason": )([^\"])([^,}]+)/g, (match, p1, p2, p3) => {
+    // 既にダブルクォートで始まっていればそのまま
+    if (p2 === '"') return match;
+    // ダブルクォートで囲む
+    return p1 + '"' + p2 + p3.replace(/"/g, '\"') + '"';
+  });
+
   try {
-    return JSON.parse(raw) as ReviewResult
+    return JSON.parse(jsonStr) as ReviewResult
   } catch (err) {
-    console.error("Failed to parse OpenRouter response as JSON:", raw)
-    throw new Error("AIからの応答が正しいJSON形式ではありませんでした。もう一度お試しください。")
+    console.error("Failed to parse OpenRouter response as JSON:", jsonStr)
+    throw new Error("AIからの応答が正しいJSON形式ではありませんでした。もう一度お試しください。\n\nAI応答:\n" + raw)
   }
 }

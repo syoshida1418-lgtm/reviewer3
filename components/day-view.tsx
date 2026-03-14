@@ -16,7 +16,7 @@ interface DayViewProps {
   onViewEntry: (entry: DiaryEntry) => void
 }
 
-export function DayView({ date, entries, onBack, onNewEntry, onEditEntry, onDeleteEntry, onViewEntry }: DayViewProps) {
+function DayView({ date, entries, onBack, onNewEntry, onEditEntry, onDeleteEntry, onViewEntry }: DayViewProps) {
   const formatDate = (date: Date) => {
     return new Intl.DateTimeFormat("en-US", {
       weekday: "long",
@@ -79,3 +79,4 @@ export function DayView({ date, entries, onBack, onNewEntry, onEditEntry, onDele
     </div>
   )
 }
+export default DayView;
