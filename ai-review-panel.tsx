@@ -113,6 +113,7 @@ export function AIReviewPanel({ text, onReviewComplete }: AIReviewPanelProps) {
       {/* Review Button */}
       <div className="flex justify-center">
         <Button
+          type="button"
           onClick={handleReview}
           disabled={isReviewing || !text.trim() || !isOnline}
           size="lg"
