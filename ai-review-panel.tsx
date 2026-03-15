@@ -230,6 +230,7 @@ export function AIReviewPanel({ text, onReviewComplete }: AIReviewPanelProps) {
                     <div className="flex items-center justify-between">
                       <Badge className={getCorrectionTypeColor(correction.type)}>{correction.type}</Badge>
                       <Button
+                        type="button"
                         size="sm"
                         variant="outline"
                         className="ml-2"
